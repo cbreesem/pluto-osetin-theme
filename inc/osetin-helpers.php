@@ -5,9 +5,9 @@
 // Excerpt "more" text settigns
 function new_excerpt_more() {
   if(get_post_format(get_the_ID()) == 'link'){
-    return '...<div class="read-more-link"><a href="'. get_field( 'external_link' ) . '">' . __('Read More', 'pluto') . '</a></div>';
+    return '...<div class="read-more-link"><a href="'. get_field( 'external_link' ) . '">' . __('详情', 'pluto') . '</a></div>';
   }else{
-    return '...<div class="read-more-link"><a href="'. get_permalink( get_the_ID() ) . '">' . __('Read More', 'pluto') . '</a></div>';
+    return '...<div class="read-more-link"><a href="'. get_permalink( get_the_ID() ) . '">' . __('详情', 'pluto') . '</a></div>';
   }
 }
 add_filter( 'excerpt_more', 'new_excerpt_more' );
@@ -26,7 +26,7 @@ function os_excerpt($limit = 16, $more = TRUE) {
 }
 
 function os_quote_excerpt($limit = 16){
-  return wp_trim_words(get_the_excerpt(), $limit, '...<span class="quote-read-more-link">' . __('Read More', 'pluto') . '</span>');
+  return wp_trim_words(get_the_excerpt(), $limit, '...<span class="quote-read-more-link">' . __('详情', 'pluto') . '</span>');
 }
 
 function os_facebook_like(){
@@ -67,7 +67,7 @@ function osetin_single_top_social_share(){
   if(get_field('disable_social_share_icons_on_post', 'option') != TRUE): ?>
     <div class="single-post-top-share">
       <i class="fa os-icon-plus share-activator-icon share-activator"></i>
-      <span class="share-activator-label share-activator caption"><?php _e("Share", "pluto") ?></span>
+      <span class="share-activator-label share-activator caption"><?php _e("分享", "pluto") ?></span>
       <div class="os_social-head-w"><?php echo do_shortcode('[os_social_buttons]'); ?></div>
     </div>
   <?php endif;
@@ -77,7 +77,7 @@ function osetin_top_social_share(){
   if(get_field('disable_social_share_icons_on_post', 'option') != TRUE): ?>
     <div class="post-top-share">
       <i class="fa os-icon-plus share-activator-icon share-activator"></i>
-      <span class="share-activator-label share-activator caption"><?php _e("Share", "pluto") ?></span>
+      <span class="share-activator-label share-activator caption"><?php _e("分享", "pluto") ?></span>
       <div class="os_social-head-w"><?php echo do_shortcode('[os_social_buttons]'); ?></div>
     </div>
   <?php endif;
@@ -86,14 +86,14 @@ function osetin_top_social_share_index(){
   if(os_is_post_element_active('social')): ?>
     <?php if(is_rtl()): ?>
       <div class="post-top-share">
-        <span class="share-activator-label share-activator caption"><?php _e("Share", "pluto") ?></span>
+        <span class="share-activator-label share-activator caption"><?php _e("分享", "pluto") ?></span>
         <i class="fa os-icon-plus share-activator-icon share-activator"></i>
         <div class="os_social-head-w"><?php echo do_shortcode('[os_social_buttons]'); ?></div>
       </div>
     <?php else: ?>
       <div class="post-top-share">
         <i class="fa os-icon-plus share-activator-icon share-activator"></i>
-        <span class="share-activator-label share-activator caption"><?php _e("Share", "pluto") ?></span>
+        <span class="share-activator-label share-activator caption"><?php _e("分享", "pluto") ?></span>
         <div class="os_social-head-w"><?php echo do_shortcode('[os_social_buttons]'); ?></div>
       </div>
     <?php endif; ?>

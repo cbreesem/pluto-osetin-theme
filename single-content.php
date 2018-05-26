@@ -8,40 +8,24 @@
                     <i class="fa os-icon-qrcode"></i>
                     <span class="caption"><?php _e('Read on Mobile', 'pluto'); ?></span>
                 </a>
-                <a href="#" class="single-post-top-reading-mode hidden-xs" data-message-on="<?php _e('Enter Reading Mode', 'pluto'); ?>" data-message-off="<?php _e('Exit Reading Mode', 'pluto'); ?>">
+                <a href="#" class="single-post-top-reading-mode hidden-xs" data-message-on="<?php _e('进入全屏模式', 'pluto'); ?>" data-message-off="<?php _e('Exit Reading Mode', 'pluto'); ?>">
                     <i class="fa os-icon-eye"></i>
-                    <span><?php _e('Enter Reading Mode', 'pluto'); ?></span>
+                    <span><?php _e('进入全屏模式', 'pluto'); ?></span>
                 </a>
                 <?php endif; ?>
             <?php endif; ?>
         </div>
-        <h1 class="post-title entry-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h1>
+        <h1 class="post-title entry-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a> (<?php $year = get_the_terms($id, 'year'); echo $year[0]->name;?>)</h1>
         <?php edit_post_link( __( 'Edit', 'twentyfourteen' ), '<div class="edit-link">', '</div>' ); ?>
+
         <div class="post-meta-top entry-meta">
-            <div class="row">
-
-                <?php if(is_rtl()): ?>
-                    <div class="col-md-6">
-                        <?php echo get_the_category_list(); ?>
-                        <?php the_tags('<ul class="post-tags"><li>','</li><li>','</li></ul>'); ?>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="post-date"><?php _e('Posted on', 'pluto'); ?> <time class="entry-date updated" datetime="<?php echo get_the_date( 'c' ); ?>"><?php echo get_the_date('M jS, Y'); ?></time></div>
-                        <div class="post-author"><strong class="author vcard"><a href="<?php echo esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) )) ; ?>" class="url fn n" rel="author"><?php echo get_the_author(); ?></a></strong> <?php _e('by', 'pluto'); ?></div>
-                    </div>
-
-                <?php else: ?>
-                    <div class="col-md-6">
-                        <div class="post-date"><?php _e('Posted on', 'pluto'); ?> <time class="entry-date updated" datetime="<?php echo get_the_date( 'c' ); ?>"><?php echo get_the_date('M jS, Y'); ?></time></div>
-                        <div class="post-author"><?php _e('by', 'pluto'); ?> <strong class="author vcard"><a href="<?php echo esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) )) ; ?>" class="url fn n" rel="author"><?php echo get_the_author(); ?></a></strong></div>
-                    </div>
-                    <div class="col-md-6">
-                        <?php the_tags('<ul class="post-tags"><li>','</li><li>','</li></ul>'); ?>
-                        <?php echo get_the_category_list(); ?>
-                    </div>
-
-                <?php endif; ?>
-            </div>
+            <?php if(is_rtl()): ?>
+                <?php echo get_the_category_list(); ?>
+                <?php the_tags('<ul class="post-tags" style="float: left;"><li style="float: left;">','</li><li style="float: left;">','</li></ul>'); ?>
+            <?php else: ?>
+                <?php the_tags('<ul class="post-tags" style="float: left;"><li style="float: left;">','</li><li style="float: left;">','</li></ul>'); ?>
+                <?php echo get_the_category_list(); ?>
+            <?php endif; ?>
         </div>
 
         <?php if(is_single()){ ?>
@@ -58,16 +42,16 @@
         <?php if(get_post_meta($post->ID, "duration", $single = true)){ ?>
         <div class="post-content">片 长：<?php echo get_post_meta($post->ID, "duration", $single = true); ?></div>
         <?php } ?>
-        <?php $terms = get_the_terms($id, 'language'); ?>
-        <?php if(count($terms)){ ?>
+        <?php $language = get_the_terms($id, 'language'); ?>
+        <?php if($language){ ?>
         <div class="post-content">语 言：
-            <?php foreach($terms as $term){ echo '<a href="'.get_term_link( $term ).'">'.$term->name.'</a> '; } ?>
+            <?php foreach($language as $term){ echo '<a href="'.get_term_link( $term ).'">'.$term->name.'</a> '; } ?>
         </div>
         <?php } ?>
-        <?php $terms = get_the_terms($id, 'district'); ?>
-        <?php if(count($terms)){ ?>
+        <?php $district = get_the_terms($id, 'district'); ?>
+        <?php if($district){ ?>
         <div class="post-content">地 区：
-            <?php foreach($terms as $term){ echo '<a href="'.get_term_link( $term ).'">'.$term->name.'</a> '; } ?>
+            <?php foreach($district as $term){ echo '<a href="'.get_term_link( $term ).'">'.$term->name.'</a> '; } ?>
         </div>
         <?php } ?>
         <?php if(get_post_meta($post->ID, "alias", $single = true)){ ?>
