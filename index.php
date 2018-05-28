@@ -7,7 +7,23 @@
 ?>
 <?php get_header(); ?>
 <div class="main-content-w">
-
+<?php
+  if ( isset($_GET['order']) ){
+    switch ($_GET['order']){
+      case 'rand' : $orderby = 'rand'; break;
+      case 'commented' : $orderby = 'comment_count'; break;
+      case 'alpha' : $orderby = 'title'; break;
+      default : $orderby = 'title';
+    }
+    if($_GET['order'] == 'rand' || $_GET['order'] == 'commented' || $_GET['order'] == 'alpha'){
+      global $wp_query;
+      $args= array('orderby' => $orderby, 'order' => 'DESC');
+      $arms = array_merge($args, $wp_query->query);
+      query_posts($arms);
+    }
+  }
+  if (have_posts())
+?>
   <?php os_the_primary_sidebar(true); ?>
 
   <div class="main-content-i">
@@ -24,8 +40,6 @@
       </div>
       <?php require_once(get_template_directory() . '/inc/isotope-navigation.php') ?>
     </div>
-
-
     <?php os_footer(); ?>
   </div>
 </div>
